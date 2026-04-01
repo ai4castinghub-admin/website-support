@@ -19,7 +19,7 @@ RSS_URL = (
     f"q={quote_plus(SEARCH_QUERY)}&hl=en-CA&gl=CA&ceid=CA:en"
 )
 
-OUTPUT_PATH = "news.json"
+OUTPUT_PATH = "slider1/news.json"
 MAX_ITEMS = 5
 DAYS_BACK = 10
 
