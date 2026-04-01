@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Forecasting Virus Research Slider</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg1: #0b2e4f;
+      --bg2: #194b8d;
+      --card: rgba(255, 255, 255, 0.08);
+      --text: #ffffff;
+      --muted: rgba(255, 255, 255, 0.82);
+      --accent: #f4c542;
+      --accent-dark: #c79712;
+      --shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+      --radius: 18px;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    .slider {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      background: linear-gradient(135deg, var(--bg1), var(--bg2));
+      min-height: 360px;
+    }
+
+    .slides {
+      display: flex;
+      width: 100%;
+      transition: transform 0.55s ease;
+    }
+
+    .slide {
+      min-width: 100%;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      padding: 38px 54px 56px;
+      min-height: 360px;
+      align-content: center;
+      color: var(--text);
+      position: relative;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .title {
+      margin: 0;
+      font-size: clamp(1.5rem, 2.8vw, 2.4rem);
+      line-height: 1.18;
+      max-width: 940px;
+    }
+
+    .meta {
+      font-size: 0.95rem;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .summary {
+      margin: 0;
+      max-width: 920px;
+      font-size: 1.02rem;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn {
+      text-decoration: none;
+      display: inline-block;
+      padding: 11px 16px;
+      border-radius: 10px;
+      background: var(--accent);
+      color: #11253d;
+      font-weight: 700;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      opacity: 0.95;
+    }
+
+    .btn.secondary {
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 42px;
+      height: 42px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.16);
+      color: white;
+      font-size: 22px;
+      cursor: pointer;
+      z-index: 5;
+      display: grid;
+      place-items: center;
+      backdrop-filter: blur(2px);
+    }
+
+    .nav:hover {
+      background: rgba(255,255,255,0.24);
+    }
+
+    .nav.prev {
+      left: 14px;
+    }
+
+    .nav.next {
+      right: 14px;
+    }
+
+    .dots {
+      position: absolute;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 5;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: none;
+      padding: 0;
+      background: rgba(255,255,255,0.36);
+      cursor: pointer;
+    }
+
+    .dot.active {
+      background: #fff;
+    }
+
+    .loading,
+    .empty,
+    .error {
+      min-height: 360px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 36px;
+      color: white;
+      background: linear-gradient(135deg, var(--bg1), var(--bg2));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .footer-note {
+      margin-top: 10px;
+      font-size: 0.85rem;
+      color: #5d6c7c;
+      text-align: right;
+      padding-right: 6px;
+    }
+
+    @media (max-width: 720px) {
+      .slide {
+        padding: 28px 24px 52px;
+        min-height: 390px;
+      }
+
+      .summary {
+        font-size: 0.96rem;
+      }
+
+      .nav {
+        width: 38px;
+        height: 38px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div id="app" class="loading">Loading recent research news…</div>
+    <div class="footer-note">Updated automatically from the repository feed.</div>
+  </div>
+
+  <script>
+    const APP = document.getElementById("app");
+    const AUTO_MS = 6500;
+    let current = 0;
+    let timer = null;
+    let items = [];
+
+    function escapeHtml(str = "") {
+      return str
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    function formatDate(input) {
+      const d = new Date(input);
+      if (Number.isNaN(d.getTime())) return "";
+      return d.toLocaleDateString("en-CA", {
+        year: "numeric",
+        month: "short",
+        day: "numeric"
+      });
+    }
+
+    function render() {
+      if (!Array.isArray(items) || items.length === 0) {
+        APP.className = "empty";
+        APP.innerHTML = "No recent items found in the current feed.";
+        return;
+      }
+
+      const slidesHtml = items.map((item) => {
+        const title = escapeHtml(item.title || "Untitled");
+        const source = escapeHtml(item.source || "Source");
+        const date = escapeHtml(formatDate(item.pubDate || ""));
+        const summary = escapeHtml(item.summary || "Open the article for more details.");
+        const link = item.link || "#";
+
+        return `
+          <section class="slide">
+            <div class="badge">Forecasting research news</div>
+            <h2 class="title">${title}</h2>
+            <div class="meta">
+              <span>${source}</span>
+              <span>•</span>
+              <span>${date}</span>
+            </div>
+            <p class="summary">${summary}</p>
+            <div class="actions">
+              <a class="btn" href="${link}" target="_blank" rel="noopener noreferrer">Read article</a>
+              <a class="btn secondary" href="${link}" target="_blank" rel="noopener noreferrer">Open source</a>
+            </div>
+          </section>
+        `;
+      }).join("");
+
+      const dotsHtml = items.map((_, i) => {
+        return `<button class="dot ${i === current ? "active" : ""}" data-index="${i}" aria-label="Go to slide ${i + 1}"></button>`;
+      }).join("");
+
+      APP.className = "slider";
+      APP.innerHTML = `
+        <button class="nav prev" aria-label="Previous slide">&#10094;</button>
+        <div class="slides">${slidesHtml}</div>
+        <button class="nav next" aria-label="Next slide">&#10095;</button>
+        <div class="dots">${dotsHtml}</div>
+      `;
+
+      bind();
+      update();
+      startAuto();
+    }
+
+    function update() {
+      const slides = APP.querySelector(".slides");
+      const dots = APP.querySelectorAll(".dot");
+      slides.style.transform = `translateX(-${current * 100}%)`;
+      dots.forEach((dot, i) => {
+        dot.classList.toggle("active", i === current);
+      });
+    }
+
+    function next() {
+      current = (current + 1) % items.length;
+      update();
+    }
+
+    function prev() {
+      current = (current - 1 + items.length) % items.length;
+      update();
+    }
+
+    function startAuto() {
+      stopAuto();
+      timer = setInterval(next, AUTO_MS);
+    }
+
+    function stopAuto() {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+    }
+
+    function bind() {
+      APP.querySelector(".next").addEventListener("click", () => {
+        next();
+        startAuto();
+      });
+
+      APP.querySelector(".prev").addEventListener("click", () => {
+        prev();
+        startAuto();
+      });
+
+      APP.querySelectorAll(".dot").forEach((dot) => {
+        dot.addEventListener("click", () => {
+          current = Number(dot.dataset.index);
+          update();
+          startAuto();
+        });
+      });
+
+      APP.addEventListener("mouseenter", stopAuto);
+      APP.addEventListener("mouseleave", startAuto);
+      APP.addEventListener("touchstart", stopAuto, { passive: true });
+      APP.addEventListener("touchend", startAuto, { passive: true });
+    }
+
+    async function loadNews() {
+      try {
+        const res = await fetch("./news.json?v=" + Date.now(), { cache: "no-store" });
+        if (!res.ok) throw new Error("Failed to load news.json");
+        const data = await res.json();
+        items = Array.isArray(data.items) ? data.items : [];
+        current = 0;
+        render();
+      } catch (err) {
+        console.error(err);
+        APP.className = "error";
+        APP.innerHTML = "Unable to load the news feed right now.";
+      }
+    }
+
+    loadNews();
+  </script>
+</body>
+</html>
