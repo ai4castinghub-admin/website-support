@@ -1,0 +1,13 @@
+{
+  "generated_at": "2026-04-01T00:00:00Z",
+  "feed_source": "placeholder",
+  "items": [
+    {
+      "title": "Forecasting research updates will appear here",
+      "link": "https://4castinghub.uoguelph.ca/",
+      "pubDate": "2026-04-01T00:00:00Z",
+      "source": "AI4Casting Hub",
+      "summary": "This placeholder slide will be replaced automatically when the GitHub Action fetches the latest items."
+    }
+  ]
+}
