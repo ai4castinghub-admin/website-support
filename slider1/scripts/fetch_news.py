@@ -9,10 +9,9 @@ from urllib.request import Request, urlopen
 import xml.etree.ElementTree as ET
 
 SEARCH_QUERY = (
-    '("virus forecasting" OR "influenza forecasting" OR '
-    '"RSV forecasting" OR "COVID forecasting" OR '
-    '"infectious disease forecasting" OR '
-    '"respiratory virus forecasting") research'
+    '(forecasting OR forecast OR prediction) '
+    '(virus OR influenza OR flu OR RSV OR COVID OR epidemic OR outbreak) '
+    '(research OR study OR model)'
 )
 
 RSS_URL = (
@@ -22,7 +21,7 @@ RSS_URL = (
 
 OUTPUT_PATH = "news.json"
 MAX_ITEMS = 5
-DAYS_BACK = 7
+DAYS_BACK = 10
 
 
 def strip_html(text: str) -> str:
