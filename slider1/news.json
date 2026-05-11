@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-10T10:36:33.248744+00:00",
+  "generated_at": "2026-05-11T12:21:49.069887+00:00",
   "feed_source": "https://news.google.com/rss/search?q=%28forecasting+OR+forecast+OR+prediction%29+%28virus+OR+influenza+OR+flu+OR+RSV+OR+COVID+OR+epidemic+OR+outbreak%29+%28research+OR+study+OR+model%29&hl=en-CA&gl=CA&ceid=CA:en",
   "items": [
     {
@@ -8,20 +8,6 @@
       "pubDate": "2026-05-08T07:00:00+00:00",
       "source": "Centers for Disease Control and Prevention | CDC (.gov)",
       "summary": "COVID-19 Ensemble Forecasts Centers for Disease Control and Prevention | CDC (.gov)"
-    },
-    {
-      "title": "Hantavirus Stirs Vaccine Skeptics, Moderna Questions, Prediction Conspiracy",
-      "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNTHJHQXh2ak5CdUNMQ1JnemgxaXVsVUt1Q1JnTXhUVjBDUW1mbmdkc2k4enZiUkRFb0JENVJwdWlsemF1eUstY0FIZWFhSWkwWVc2TVNmLU4xeEYyTWdwZ2QzcGhCUWo5TWg3UDVHNl9YdXBySVN6ODlrRV9qS0p6N2hfVGpvM1hDRTlBdEcwUzlNeUFRcHdoU1hTMFZncFBDX3pvZlplSXF5dVE?oc=5",
-      "pubDate": "2026-05-07T18:51:00+00:00",
-      "source": "Newsweek",
-      "summary": "Hantavirus Stirs Vaccine Skeptics, Moderna Questions, Prediction Conspiracy Newsweek"
-    },
-    {
-      "title": "RSV Ensemble Forecasts",
-      "link": "https://news.google.com/rss/articles/CBMifEFVX3lxTE1BRVlFMzdNbzI2bkowM2czQl9BQUQwUUFDTThIcXVFbk1seUQwTkFFSXRacDlTMFNPRUFiNE9teVNaUjdnZlR6aHhHNV8wNXFfeU55cVlMV0dkRS0zZjg3UDRvV0ctMUNrbVdnWTZiMmdOdGRENElQTF9RYkM?oc=5",
-      "pubDate": "2026-05-01T07:00:00+00:00",
-      "source": "Centers for Disease Control and Prevention | CDC (.gov)",
-      "summary": "RSV Ensemble Forecasts Centers for Disease Control and Prevention | CDC (.gov)"
     }
   ]
 }
