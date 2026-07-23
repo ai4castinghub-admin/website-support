@@ -1,20 +1,20 @@
 {
-  "generated_at": "2026-07-22T11:18:02.209744+00:00",
+  "generated_at": "2026-07-23T11:19:11.728277+00:00",
   "feed_source": "https://news.google.com/rss/search?q=%28forecasting+OR+forecast+OR+prediction%29+%28virus+OR+influenza+OR+flu+OR+RSV+OR+COVID+OR+epidemic+OR+outbreak%29+%28research+OR+study+OR+model%29&hl=en-CA&gl=CA&ceid=CA:en",
   "items": [
-    {
-      "title": "Current Epidemic Trends (Based on Rt) | CFA: Modeling and Forecasting",
-      "link": "https://news.google.com/rss/articles/CBMifEFVX3lxTE1BYmhYTXpjS2ZwUTZfeE1tbzFyb0E4YmtHM0dMcWdPZTV4Y1luUm9tSzctd0tsZnB0QTBfWlVURXRTNTFPb2ljdE9Kd19rZ1Qybnp2UkFRc2RvTm9NMTRnU2ZjYzlIZzh3bVNfbTA2MmNhWFBqOG9uVGFuMHE?oc=5",
-      "pubDate": "2026-07-16T07:00:00+00:00",
-      "source": "Centers for Disease Control and Prevention | CDC (.gov)",
-      "summary": "Current Epidemic Trends (Based on Rt) | CFA: Modeling and Forecasting Centers for Disease Control and Prevention | CDC (.gov)"
-    },
     {
       "title": "COVID-19 Ensemble Forecasts",
       "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxObHcxNGhROW9tc0xZRkJGR2F6eUVDckVrektJUUl3MFh3WkNycmkwc09oZ0FYSGc3TzlpNFVvVE12SThkbHdtSWhTckVEakctajlCY1o0cE12aS0tc2RfWkh0R0ZRMHYwOUdaYjE0LTIzdkJuUnNMTk1qMnljeGVtU1FB?oc=5",
       "pubDate": "2026-07-16T07:00:00+00:00",
       "source": "Centers for Disease Control and Prevention | CDC (.gov)",
       "summary": "COVID-19 Ensemble Forecasts Centers for Disease Control and Prevention | CDC (.gov)"
+    },
+    {
+      "title": "Current Epidemic Trends (Based on Rt) | CFA: Modeling and Forecasting",
+      "link": "https://news.google.com/rss/articles/CBMie0FVX3lxTE1pcWN6eWlZSFlyOHlCY0VzVVZWc2l0b0hzWllVQjJxdlV4alM3dTF3VVZ5eHdGYVpMT3l5dkNFOUNJRkxFeVZ0bGlUNzhHSEJyZ2pQdU53cE8xUUR1N2VCd1dJanZ5a3BtYWtuRE1qb2lxMVlzVmVSQ1poUQ?oc=5",
+      "pubDate": "2026-07-16T07:00:00+00:00",
+      "source": "Centers for Disease Control and Prevention | CDC (.gov)",
+      "summary": "Current Epidemic Trends (Based on Rt) | CFA: Modeling and Forecasting Centers for Disease Control and Prevention | CDC (.gov)"
     }
   ]
 }
